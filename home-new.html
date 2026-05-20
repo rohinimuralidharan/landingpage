@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nShield Documentation</title>
+
+  <!-- Google Tag Manager — replace GTM-5C2GNN with your actual ID if different -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5C2GNN');</script>
+
+  <style>
+    /* ─────────────────────────────────────────────
+       ENTRUST PLUM PALETTE  (base: #723988)
+       plum-900  #3d1a4f   nav, hero, family headers
+       plum-700  #5a2d7a   Security World header, links
+       plum-600  #723988   section accents, zone badges
+       plum-400  #9b5cb5   icon fills, mid-tones
+       plum-100  #e8d8f0   chip bg, badge fills
+       plum-50   #f4eef8   page background
+       red       #c8392b   Entrust red accent
+       ───────────────────────────────────────────── */
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --plum-900: #3d1a4f;
+      --plum-700: #5a2d7a;
+      --plum-600: #723988;
+      --plum-400: #9b5cb5;
+      --plum-100: #e8d8f0;
+      --plum-50:  #f4eef8;
+      --red:      #c8392b;
+      --red-light:#fdecea;
+      --gray-100: #f1efe8;
+      --gray-200: #e3dfd8;
+      --gray-400: #888780;
+      --gray-600: #5f5e5a;
+      --white:    #ffffff;
+      --border:   #c9b8d4;
+      --border-light: #e3d5eb;
+      --link:     #5a2d7a;
+      --text:     #1a1a1a;
+      --text-mid: #3d1a4f;
+      --text-muted: #5f5e5a;
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.6;
+      background: var(--plum-50);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    main { flex: 1; padding-bottom: 40px; }
+
+    /* ── NAV ── */
+    .nav {
+      background: var(--plum-900);
+      padding: 14px 0;
+      border-bottom: 1px solid #2a0e38;
+    }
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .nav-logo img {
+      height: 28px;
+      display: block;
+    }
+    .nav-divider {
+      width: 1px;
+      height: 22px;
+      background: #ffffff33;
+    }
+    .nav-title {
+      color: #dcc8e8;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .nav-links a {
+      color: #b896cc;
+      font-size: 13px;
+      border-bottom: 1px dashed #b896cc55;
+      padding-bottom: 1px;
+    }
+    .nav-links a:hover {
+      color: #dcc8e8;
+      text-decoration: none;
+      border-bottom-color: #dcc8e8;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--plum-900);
+      border-bottom: 3px solid var(--red);
+      padding: 36px 0 40px;
+    }
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #b896cc;
+      margin-bottom: 8px;
+    }
+    .hero h1 {
+      font-size: 26px;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .hero-sub {
+      font-size: 14px;
+      color: #c9add8;
+      line-height: 1.7;
+      max-width: 560px;
+    }
+
+    /* ── SECTION STRUCTURE ── */
+    .section {
+      padding: 32px 0 0;
+    }
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--plum-600);
+      border-left: 3px solid var(--red);
+      padding-left: 10px;
+      margin-bottom: 16px;
+    }
+
+    /* ── JOURNEY CARDS (start here) ── */
+    .journey-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+    .journey-card {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-left: 3px solid var(--red);
+      border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+      padding: 18px 20px;
+    }
+    .journey-badge {
+      display: inline-block;
+      background: var(--red-light);
+      color: var(--red);
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+      margin-bottom: 10px;
+    }
+    .journey-card h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--plum-900);
+      margin-bottom: 6px;
+    }
+    .journey-card p {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 12px;
+    }
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .link-list a {
+      font-size: 12px;
+      color: var(--link);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .link-list a::before {
+      content: "›";
+      font-size: 14px;
+      line-height: 1;
+      color: var(--plum-400);
+    }
+    .link-list a:hover { text-decoration: underline; }
+
+    /* ── FAMILY BLOCK ── */
+    .family-block {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .family-header {
+      background: var(--plum-900);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .family-header-text .family-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+    }
+    .family-header-text .family-sub {
+      font-size: 11px;
+      color: #b896cc;
+      margin-top: 1px;
+    }
+    .model-grid {
+      display: grid;
+      background: var(--white);
+    }
+    .model-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+    .model-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+
+    .model-card {
+      padding: 16px 18px;
+      border-right: 0.5px solid var(--border-light);
+      border-bottom: 0.5px solid var(--border-light);
+    }
+    .model-card:last-child { border-right: none; }
+    .model-card.legacy { background: #faf8fc; }
+    .model-card.soft { background: #faf8fc; }
+
+    .model-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--plum-400);
+      margin-bottom: 5px;
+    }
+    .model-tag.is-legacy { color: var(--gray-400); }
+    .model-tag.is-soft   { color: var(--gray-400); }
+
+    .model-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--plum-900);
+      margin-bottom: 2px;
+    }
+    .model-name.is-legacy { color: var(--text-muted); }
+    .model-name.is-soft   { color: var(--plum-700); font-size: 13px; }
+
+    .model-prev {
+      font-size: 11px;
+      color: var(--gray-400);
+      margin-bottom: 8px;
+    }
+
+
+    .model-sep {
+      border: none;
+      border-top: 0.5px solid var(--border-light);
+      margin: 10px 0;
+    }
+
+    /* ── EARLIER MODELS NOTE ── */
+    .earlier-note {
+      background: var(--plum-50);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 11px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+      font-size: 12px;
+      color: var(--text-mid);
+    }
+    .earlier-note a {
+      font-weight: 500;
+      margin-left: 4px;
+    }
+
+    /* ── SECURITY WORLD BLOCK ── */
+    .sw-block {
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      margin-bottom: 32px;
+    }
+    .sw-header {
+      background: var(--plum-700);
+      padding: 12px 18px;
+    }
+    .sw-header .sw-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+    .sw-header .sw-sub {
+      font-size: 11px;
+      color: #c9add8;
+    }
+    .sw-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      background: var(--white);
+    }
+    .sw-col {
+      padding: 16px 18px;
+      border-right: 0.5px solid var(--border-light);
+    }
+    .sw-col:last-child { border-right: none; }
+    .sw-col-title {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--plum-900);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+
+    /* ── INTEGRATION GRID ── */
+    .int-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+    .int-card {
+      background: var(--white);
+      border: 0.5px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 13px 15px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+    .int-card.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .int-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--plum-900);
+      margin-bottom: 3px;
+    }
+    .int-acro {
+      display: inline-block;
+      font-size: 10px;
+      color: var(--plum-400);
+      background: var(--plum-50);
+      border: 0.5px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 3px;
+      margin-left: 5px;
+      vertical-align: middle;
+    }
+    .int-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.45;
+    }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--plum-900);
+      border-top: 1px solid #2a0e38;
+      padding: 20px 0;
+      margin-top: auto;
+    }
+    .footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .footer-links a {
+      color: #b896cc;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .footer-links a svg {
+      width: 14px;
+      height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .footer-links a:hover { color: #dcc8e8; text-decoration: none; }
+    .footer-copy {
+      font-size: 11px;
+      color: #6b4585;
+    }
+    .footer-logo {
+      margin-bottom: 12px;
+    }
+    .footer-logo img { height: 24px; opacity: 0.7; }
+    .footer-bottom {
+      border-top: 0.5px solid #2a0e38;
+      margin-top: 14px;
+      padding-top: 14px;
+    }
+    .footer-legal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .footer-legal a {
+      font-size: 11px;
+      color: #6b4585;
+    }
+    .footer-legal a:hover { color: #b896cc; text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .journey-grid    { grid-template-columns: 1fr; }
+      .model-grid.cols-3 { grid-template-columns: 1fr; }
+      .model-grid.cols-2 { grid-template-columns: 1fr; }
+      .sw-cols         { grid-template-columns: 1fr; }
+      .int-grid        { grid-template-columns: 1fr; }
+      .int-card.full-width { grid-column: 1; }
+      .nav-links       { display: none; }
+      .hero h1         { font-size: 20px; }
+      .footer .container { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .model-grid.cols-3,
+      .model-grid.cols-2 { grid-template-columns: 1fr; }
+      .model-card { border-right: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5C2GNN"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+<!-- ════════════════════════════════
+     NAVIGATION
+════════════════════════════════ -->
+<nav class="nav" role="navigation" aria-label="Site navigation">
+  <div class="container">
+    <div class="nav-left">
+      <a class="nav-logo" href="https://www.entrust.com/" aria-label="Entrust website">
+        <img src="/Resources/Images/logo_entrust_lockup.svg" alt="Entrust" />
+      </a>
+      <div class="nav-divider" aria-hidden="true"></div>
+      <span class="nav-title">nShield Documentation</span>
+    </div>
+    <div class="nav-links">
+      <a href="https://www.youtube.com/channel/UCzFRSTUUaTcv1tggXRBTW6Q">Videos</a>
+      <a href="/a-home/glossary.html">Glossary</a>
+      <a href="https://nshieldsupport.entrust.com/hc/en-us">Contact support</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════
+     HERO
+════════════════════════════════ -->
+<header class="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Entrust nShield HSM</p>
+    <h1>nShield Product Documentation</h1>
+    <p class="hero-sub">Find guides for installing, managing, developing with, and extending your nShield HSM. Select your product below or start with a guided journey.</p>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- ════════════════════════════════
+         ZONE 1 — START HERE
+    ════════════════════════════════ -->
+    <section class="section" aria-labelledby="start-heading">
+      <p class="section-label" id="start-heading">Start here</p>
+      <div class="journey-grid">
+
+        <div class="journey-card">
+          <span class="journey-badge">New to nShield</span>
+          <h3>Set up your first HSM</h3>
+          <p>Hardware installation, Security World software setup, and initial configuration for new deployments.</p>
+          <nav class="link-list" aria-label="New HSM setup links">
+            <a href="/security-world-docs/hardware-install/intro.html">Hardware install guide</a>
+            <a href="/security-world-docs/software-install/intro.html">Software installation guide</a>
+            <a href="/security-world-docs/secworld-admin/create-secworld.html">Create a Security World</a>
+            <a href="/nshield-docs-assets/qsgs/intro.html">Quick-start guides (PDF)</a>
+          </nav>
+        </div>
+
+        <div class="journey-card">
+          <span class="journey-badge">Upgrading to nShield 5</span>
+          <h3>Adopt the nShield 5 family</h3>
+          <p>Migrating from Solo XC or Connect XC? Plan your transition while keeping your existing Security World intact.</p>
+          <nav class="link-list" aria-label="nShield 5 adoption links">
+            <a href="/app-notes/nshield5-adoption/nshield5-overview.html">nShield 5 adoption guide</a>
+            <a href="/app-notes/nshield5-adoption/new-in-nshield5.html">What's new in nShield 5</a>
+            <a href="/app-notes/nshield5-adoption/nshield5-adoption-steps.html">Adoption steps</a>
+            <a href="/app-notes/nshield5-adoption/nshield5-certifications.html">Certifications &amp; compliance</a>
+          </nav>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         ZONE 2 — YOUR HSM
+    ════════════════════════════════ -->
+    <section class="section" aria-labelledby="hsm-heading">
+      <p class="section-label" id="hsm-heading">nShield hardware documentation</p>
+
+      <!-- Network-attached -->
+      <div class="family-block">
+        <div class="family-header">
+          <div class="family-header-text">
+            <p class="family-title">nShield 5c — network-attached HSM</p>
+            <p class="family-sub">Rack-mounted appliance · high availability · shared key services across the network</p>
+          </div>
+        </div>
+        <div class="model-grid cols-3">
+          <div class="model-card">
+            <p class="model-tag">Current generation</p>
+            <p class="model-name">nShield 5c</p>
+            <p class="model-prev">Successor to Connect XC</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="nShield 5c documentation">
+              <a href="/security-world-docs/hardware-install/na-install.html">Install &amp; rack setup</a>
+              <a href="/security-world-docs/hsm-user-guide/na/configuration.html">Configure &amp; manage</a>
+              <a href="/security-world-docs/hsm-user-guide/na/upgrade-connect-fw.html">Upgrade firmware</a>
+              <a href="/security-world-docs/remote-admin/intro.html">Remote administration</a>
+              <a href="/security-world-docs/hsm-user-guide/na/troubleshooting.html">Troubleshoot</a>
+            </nav>
+          </div>
+          <div class="model-card">
+            <p class="model-tag">Previous generation</p>
+            <p class="model-name">nShield Connect XC</p>
+            <p class="model-prev">Also: Connect+</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="nShield Connect XC documentation">
+              <a href="/security-world-docs/hardware-install/na-install.html">Install &amp; rack setup</a>
+              <a href="/security-world-docs/hsm-user-guide/na/configuration.html">Configure &amp; manage</a>
+              <a href="/security-world-docs/hsm-user-guide/na/upgrade-connect-fw.html">Upgrade firmware</a>
+              <a href="/security-world-docs/hsm-user-guide/na/troubleshooting.html">Troubleshoot</a>
+            </nav>
+          </div>
+          <div class="model-card legacy">
+            <p class="model-tag is-legacy">Legacy</p>
+            <p class="model-name is-legacy">nShield Connect</p>
+            <p class="model-prev">Connect 500 / 1500 / 6000+</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="Legacy nShield Connect documentation">
+              <a href="/security-world-docs/v12.81/intro.html">Version archive (v12.81)</a>
+              <a href="/release-notes/intro.html">Release notes</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- PCIe -->
+      <div class="family-block">
+        <div class="family-header">
+          <div class="family-header-text">
+            <p class="family-title">nShield 5s — PCIe HSM</p>
+            <p class="family-sub">PCIe card embedded in host server · dedicated cryptographic services · high throughput</p>
+          </div>
+        </div>
+        <div class="model-grid cols-3">
+          <div class="model-card">
+            <p class="model-tag">Current generation</p>
+            <p class="model-name">nShield 5s</p>
+            <p class="model-prev">Successor to Solo XC</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="nShield 5s documentation">
+              <a href="/security-world-docs/hardware-install/pcie-install.html">Install PCIe card</a>
+              <a href="/security-world-docs/hsm-user-guide/pcie/operation-modes-nshield5s.html">Modes of operation</a>
+              <a href="/security-world-docs/hsm-user-guide/pcie/upgrade-nshield5s-fw.html">Upgrade firmware</a>
+              <a href="/security-world-docs/hsm-user-guide/pcie/virtualization.html">Virtualisation setup</a>
+              <a href="/security-world-docs/hsm-user-guide/pcie/troubleshooting-5s.html">Troubleshoot</a>
+            </nav>
+          </div>
+          <div class="model-card">
+            <p class="model-tag">Previous generation</p>
+            <p class="model-name">nShield Solo XC</p>
+            <p class="model-prev">Also: Solo+</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="nShield Solo XC documentation">
+              <a href="/security-world-docs/hardware-install/pcie-install.html">Install PCIe card</a>
+              <a href="/security-world-docs/hsm-user-guide/pcie/config-pcie-usb.html">Configure &amp; manage</a>
+              <a href="/security-world-docs/hsm-user-guide/pcie/upgrade-solo-edge-fw.html">Upgrade firmware</a>
+              <a href="/security-world-docs/hsm-user-guide/pcie/troubleshooting-5s.html">Troubleshoot</a>
+            </nav>
+          </div>
+          <div class="model-card legacy">
+            <p class="model-tag is-legacy">Legacy</p>
+            <p class="model-name is-legacy">nShield Solo</p>
+            <p class="model-prev">Solo 500 / 6000</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="Legacy nShield Solo documentation">
+              <a href="/security-world-docs/v12.81/intro.html">Version archive (v12.81)</a>
+              <a href="/release-notes/intro.html">Release notes</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edge -->
+      <div class="family-block">
+        <div class="family-header">
+          <div class="family-header-text">
+            <p class="family-title">nShield Edge — USB portable HSM</p>
+            <p class="family-sub">Lightweight portable HSM · offline CA key generation · development &amp; BYOK workflows</p>
+          </div>
+        </div>
+        <div class="model-grid cols-2">
+          <div class="model-card">
+            <p class="model-tag">Current</p>
+            <p class="model-name">nShield Edge</p>
+            <p class="model-prev">USB-attached portable HSM</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="nShield Edge documentation">
+              <a href="/security-world-docs/hardware-install/usb-setup.html">Set up the Edge</a>
+              <a href="/security-world-docs/hsm-user-guide/usb/check-change-mode-edge.html">Modes of operation</a>
+              <a href="/security-world-docs/hsm-user-guide/usb/compatibility.html">Windows compatibility</a>
+              <a href="/security-world-docs/hsm-user-guide/usb/troubleshooting.html">Troubleshoot</a>
+            </nav>
+          </div>
+          <div class="model-card soft">
+            <p class="model-tag is-soft">Shared across all models</p>
+            <p class="model-name is-soft">Security World software</p>
+            <p class="model-prev">Applies to all nShield HSM types</p>
+            <hr class="model-sep">
+            <nav class="link-list" aria-label="Security World software links">
+              <a href="/security-world-docs/release-notes/release-notes.html">Security World v13.9 release notes</a>
+              <a href="/lts-docs/lts-overview/intro.html">Software release policy &amp; support</a>
+              <a href="/security-world-docs/key-mgmt/intro.html">Key Management Guide</a>
+              <a href="/security-world-docs/security-manual/intro.html">Security Manual</a>
+              <a href="/nshield-docs-assets/qsgs/intro.html">Quick-start guides (PDF)</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Earlier models note -->
+      <div class="earlier-note" role="note">
+        <span>Using an earlier model? Documentation for Connect XC, Connect+, Solo XC, and Solo+ is available within the Security World version archive.</span>
+        <a href="/security-world-docs/intro.html">View version archive →</a>
+      </div>
+
+    </section>
+
+    <!-- ════════════════════════════════
+         ZONE 3 — SECURITY WORLD & APIs
+    ════════════════════════════════ -->
+    <section class="section" aria-labelledby="sw-heading">
+      <p class="section-label" id="sw-heading">Security World software &amp; developer APIs</p>
+      <div class="sw-block">
+        <div class="sw-header">
+          <p class="sw-title">nShield Security World</p>
+          <p class="sw-sub">Software, key management, and cryptographic APIs shared across all nShield HSM models</p>
+        </div>
+        <div class="sw-cols">
+          <div class="sw-col">
+            <p class="sw-col-title">Keys &amp; Security World</p>
+            <nav class="link-list" aria-label="Keys and Security World links">
+              <a href="/security-world-docs/secworld-admin/intro.html">Management Guide</a>
+              <a href="/security-world-docs/key-mgmt/intro.html">Key Management Guide</a>
+              <a href="/security-world-docs/secworld-admin/manage-cardsets-softcards.html">Smart cards (OCS &amp; ACS)</a>
+              <a href="/ks5-docs/intro.html">KeySafe 5</a>
+              <a href="/key-attestation-docs/intro.html">Key Attestation</a>
+              <a href="/lts-docs/licensing/nshield-licensing.html">HSM licensing</a>
+            </nav>
+          </div>
+          <div class="sw-col">
+            <p class="sw-col-title">Developer APIs</p>
+            <nav class="link-list" aria-label="Developer API links">
+              <a href="/security-world-docs/api-intro/intro.html">API intro &amp; architecture</a>
+              <a href="/security-world-docs/api-ncore/intro.html">nCore developer tutorial</a>
+              <a href="/security-world-docs/api-pkcs11/intro.html">PKCS #11 reference</a>
+              <a href="/security-world-docs/api-ncipherkm/intro.html">nCipherKM JCA/JCE</a>
+              <a href="/security-world-docs/api-cng/intro.html">Microsoft CNG</a>
+              <a href="/security-world-docs/api-capi/intro.html">Microsoft CryptoAPI</a>
+            </nav>
+          </div>
+          <div class="sw-col">
+            <p class="sw-col-title">Comply &amp; monitor</p>
+            <nav class="link-list" aria-label="Compliance and monitoring links">
+              <a href="/security-world-docs/security-manual/intro.html">Security Manual</a>
+              <a href="/security-world-docs/hsm-user-guide/hsm-mgmt/audit-logging.html">Audit logging</a>
+              <a href="/monitor-docs/intro.html">nShield Monitor</a>
+              <a href="/security-world-docs/snmp/intro.html">SNMP monitoring agent</a>
+              <a href="/nshield-docs-assets/regulatory-docs/intro.html">Compliance &amp; regulatory docs</a>
+              <a href="/security-world-docs/remote-admin/intro.html">Remote Administration</a>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         ZONE 4 — INTEGRATION GUIDES
+    ════════════════════════════════ -->
+    <section class="section" aria-labelledby="int-heading">
+      <p class="section-label" id="int-heading">Integration guides</p>
+      <div class="int-grid" style="margin-bottom:32px;">
+
+        <!-- Full-width: third-party integrations -->
+        <div class="int-card full-width">
+          <div>
+            <p class="int-name">Third-party integration guides</p>
+            <p class="int-desc">Deploy nShield HSMs with solutions from major vendors — certificate authorities, PKI platforms, databases, cloud providers, and more. Covers AWS KMS XKS, Azure Key Vault, HashiCorp Vault, Oracle TDE, Microsoft AD CS, and many others.</p>
+            <div style="margin-top:8px;">
+              <a href="/interops-docs/home/intro.html" style="font-size:12px; font-weight:500; color:var(--link);">Browse all integration guides →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ════════════════════════════════
+         ZONE 5 — OPTION PACKS
+    ════════════════════════════════ -->
+    <section class="section" aria-labelledby="op-heading">
+      <p class="section-label" id="op-heading">Option packs</p>
+      <div class="int-grid" style="margin-bottom:32px;">
+
+        <div class="int-card">
+          <div>
+            <p class="int-name">Cloud key management <span class="int-acro">CIOP</span></p>
+            <p class="int-desc">Use your HSM with AWS, Azure, or GCP key management services</p>
+            <div style="margin-top:6px;"><a href="/ciop-docs/intro.html" style="font-size:11px;">View documentation →</a></div>
+          </div>
+        </div>
+
+        <div class="int-card">
+          <div>
+            <p class="int-name">Containerised deployments <span class="int-acro">nCOP</span></p>
+            <p class="int-desc">Run HSM-backed applications in Docker or Kubernetes</p>
+            <div style="margin-top:6px;"><a href="/ncop-docs/intro.html" style="font-size:11px;">View documentation →</a></div>
+          </div>
+        </div>
+
+        <div class="int-card">
+          <div>
+            <p class="int-name">Database encryption <span class="int-acro">nDSOP</span></p>
+            <p class="int-desc">HSM-backed key management for database encryption</p>
+            <div style="margin-top:6px;"><a href="/ndsop-docs/intro.html" style="font-size:11px;">View documentation →</a></div>
+          </div>
+        </div>
+
+        <div class="int-card">
+          <div>
+            <p class="int-name">Timestamping <span class="int-acro">TSOP</span></p>
+            <p class="int-desc">HSM-backed RFC 3161 timestamps for document signing</p>
+            <div style="margin-top:6px;"><a href="/tsop-docs/intro.html" style="font-size:11px;">View documentation →</a></div>
+          </div>
+        </div>
+
+        <div class="int-card">
+          <div>
+            <p class="int-name">Post-quantum cryptography <span class="int-acro">PQCOP</span></p>
+            <p class="int-desc">NIST-approved quantum-resistant algorithms for your HSM</p>
+            <div style="margin-top:6px;"><a href="/pqcop-docs/intro.html" style="font-size:11px;">View documentation →</a></div>
+          </div>
+        </div>
+
+        <div class="int-card">
+          <div>
+            <p class="int-name">Web services &amp; SQL EKM <span class="int-acro">WSOP</span></p>
+            <p class="int-desc">Access HSM functions over REST/SOAP; SQL Server EKM provider</p>
+            <div style="margin-top:6px;"><a href="/wsop-docs/intro.html" style="font-size:11px;">View documentation →</a></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /container -->
+</main>
+
+<!-- ════════════════════════════════
+     FOOTER
+════════════════════════════════ -->
+<footer class="footer">
+  <div class="container">
+    <div>
+      <div class="footer-logo">
+        <img src="/Resources/Images/logo_entrust_lockup.svg" alt="Entrust" />
+      </div>
+      <div class="footer-links">
+        <a href="https://nshieldsupport.entrust.com/hc/en-us">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.62 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Contact support
+        </a>
+        <a href="https://www.youtube.com/channel/UCzFRSTUUaTcv1tggXRBTW6Q">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+          Videos
+        </a>
+        <a href="mailto:nshield.docs@entrust.com?subject=Documentation Feedback">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Docs feedback
+        </a>
+        <a href="/a-home/glossary.html">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Glossary
+        </a>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-legal">
+          <span class="footer-copy">©2026 Entrust Corporation. All rights reserved.</span>
+          <a href="https://www.entrust.com/legal-compliance">Legal</a>
+          <a href="https://www.entrust.com/legal-compliance/data-privacy/privacy-statement">Privacy Statement</a>
+          <a href="https://www.entrust.com/legal-compliance/terms-conditions">Terms of Service</a>
+          <a href="https://www.entrust.com/legal-compliance/terms-of-use">Terms of Use</a>
+          <a href="https://www.entrust.com/legal-compliance/policies">Company Policies</a>
+          <a href="https://www.entrust.com/legal-compliance/policies">Cookie Policies</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
